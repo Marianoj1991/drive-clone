@@ -14,7 +14,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
   return (
     <main className='flex h-screen'>
       <Sidebar {...currentUser} />
-
       <section className='flex flex-col flex-1 h-full'>
         <MobileNavigation {...currentUser} /> <Header {...currentUser} />
         <div className='main-content'>{children}</div>

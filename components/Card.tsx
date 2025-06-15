@@ -3,6 +3,7 @@ import { Models } from 'node-appwrite'
 import Thumbnail from './Thumbnail'
 import { convertFileSize } from '@/lib/utils'
 import FormattedDateTime from './FormattedDateTime'
+import ActionDropDown from './ActionDropDown'
 
 export default function Card({ file }: { file: Models.Document }) {
   return (
@@ -11,7 +12,7 @@ export default function Card({ file }: { file: Models.Document }) {
       target='_blank'
       className='file-card'
     >
-      <div>
+      <div className='flex justify-between'>
         <Thumbnail
           type={file.type}
           extension={file.extension}
@@ -21,7 +22,7 @@ export default function Card({ file }: { file: Models.Document }) {
         />
 
         <div className='flex flex-col items-end justify-between'>
-          ActionsDropDrow...
+          <ActionDropDown file={file} />
           <p className='body-1'>{convertFileSize(file.size)}</p>
         </div>
       </div>

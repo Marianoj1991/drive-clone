@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Thumbnail from './Thumbnail'
 import { MAX_FILE_SIZE } from '@/constants'
 import { useToast } from '@/hooks/use-toast'
-import { uploadFile } from '@/lib/actions/file.actions'
+import { handleError, uploadFile } from '@/lib/actions/file.actions'
 import { usePathname } from 'next/navigation'
 
 interface Props {
@@ -25,18 +25,18 @@ export default function FileUploader({
   const path = usePathname()
   const { toast } = useToast()
   const [files, setFiles] = useState<File[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
       setFiles(acceptedFiles)
-
-      const uploadPromises = acceptedFiles.map(async (file) => {
+      acceptedFiles.map(async (file) => {
         if (file.size > MAX_FILE_SIZE) {
           setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name))
 
           return toast({
             description: (
-              <p className='body-2 text-white'>
+              <p className='body-2 text-white z-50'>
                 <span className='font-semibold'>{file.name}</span> is to large.
                 Max file size is 50MB.
               </p>
@@ -44,7 +44,17 @@ export default function FileUploader({
             className: 'error-toast'
           })
         }
+      })
+    },
+    [ownerId, accountId, path]
+  )
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+  const handleUpdateFiles = async () => {
+    try {
+      setIsLoading(true)
+      const uploadPromises = files.map((file) => {
         return uploadFile({ file, ownerId, accountId, path }).then(
           (uploadedFile) => {
             if (uploadedFile) {
@@ -55,49 +65,58 @@ export default function FileUploader({
           }
         )
       })
-
       await Promise.all(uploadPromises)
-    },
-    [ownerId, accountId, path]
-  )
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+    } catch (err) {
+      handleError(err, 'Error uploading files')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleRemoveFile = (
     e: MouseEvent<HTMLImageElement>,
     fileName: string
   ) => {
     e.stopPropagation()
-    setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName))
+    setFiles((prevFiles: File[]) =>
+      prevFiles.filter((file) => file.name !== fileName)
+    )
   }
 
   return (
-    <div
-      {...getRootProps()}
-      className='cursor-pointer'
-    >
-      <input {...getInputProps()} />
-      <Button
-        type='button'
-        className={cn('uploader-button')}
+    <>
+      <div
+        {...getRootProps()}
+        className='cursor-pointer'
       >
-        <Image
-          src='/assets/icons/upload.svg'
-          alt='Upload icon'
-          width={25}
-          height={25}
-        />
-        <p>Upload</p>
-      </Button>
+        <input {...getInputProps()} />
+        <Button
+          type='button'
+          className={cn('uploader-button')}
+        >
+          <Image
+            src='/assets/icons/upload.svg'
+            alt='Upload icon'
+            width={25}
+            height={25}
+          />
+          <p>{isDragActive ? 'Drop the file here' : 'Upload'}</p>
+        </Button>
+      </div>
 
       {files.length > 0 && (
         <ul className='uploader-preview-list'>
-          <h4 className='h4 text-light-100'>Uploading</h4>
+          {/* <h4 className='h4 text-light-100'>Uploading</h4> */}
+          <button
+            className='h4 bg-rose-400 px-5 py-3 rounded-xl w-fit text-white font-bold'
+            disabled={isLoading}
+            onClick={handleUpdateFiles}
+          >
+            {!isLoading ? 'Confirm uploading?' : 'Uploading'}
+          </button>
           {files.map((file, index) => {
-            console.log(file.name)
             const { type, extension } = getFileType(file.name)
 
-            console.log(extension)
             return (
               <li
                 key={`${file.name}-${index}`}
@@ -112,12 +131,14 @@ export default function FileUploader({
 
                   <div className='preview-item-name'>
                     {file.name}
-                    <Image
-                      src='/assets/icons/file-loader.gif'
-                      width={80}
-                      height={26}
-                      alt='Loader'
-                    />
+                    {isLoading && (
+                      <Image
+                        src='/assets/icons/file-loader.gif'
+                        width={80}
+                        height={26}
+                        alt='Loader'
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -133,6 +154,6 @@ export default function FileUploader({
           })}
         </ul>
       )}
-    </div>
+    </>
   )
 }
