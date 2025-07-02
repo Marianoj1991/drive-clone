@@ -39,7 +39,6 @@ export default function OTPModal({
     setIsLoading(true)
 
     try {
-      // VERIFY OTP
       const sessionId = await verifySecret({ accountId, password })
 
       if (sessionId) router.push('/')

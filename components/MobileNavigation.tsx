@@ -39,14 +39,13 @@ export default function MobileNavigation({
     <header className='mobile-header'>
       <Link
         href='/'
-        className='h-full'
+        className='h-auto w-[170px] flex items-center relative'
       >
         <Image
-          src='/assets/icons/logo-full-brand.svg'
+          src='/assets/icons/logo-full-brand.png'
           alt='logo'
-          width={120}
-          height={52}
-          className='h-full'
+          fill
+          className='object-contain'
         />
       </Link>
       <Sheet

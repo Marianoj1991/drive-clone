@@ -1,11 +1,12 @@
 'use client'
 
-import Image from 'next/image'
-import { Input } from './ui/input'
 import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Models } from 'node-appwrite'
-import { getFiles } from '@/lib/actions/file.actions'
+import { useDebounce } from 'use-debounce'
+import { Input } from './ui/input'
+import { getFiles, handleError } from '@/lib/actions/file.actions'
 import Thumbnail from './Thumbnail'
 import FormattedDateTime from './FormattedDateTime'
 
@@ -14,34 +15,48 @@ export default function Search() {
   const [results, setResults] = useState<Models.Document[]>([])
   const [open, setOpen] = useState(false)
   const searchParams = useSearchParams()
-  const searchText = searchParams.get('query') || ''
+  const searchQuery = searchParams.get('query') || ''
   const router = useRouter()
+  const path = usePathname()
+  const [debounceQuery] = useDebounce(query, 1000)
 
   useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+    if (debounceQuery.length === 0) {
+      setResults([])
+      setOpen(false)
+      return router.push(path.replace(searchParams.toString(), ''))
+    }
     const fetchFiles = async () => {
-      const files = await getFiles({ searchText: query })
-      if (files) {
-        setResults(files.documents)
-        setOpen(true)
-      } else {
-        setOpen((e) => !e)
+      try {
+        const files = await getFiles({ types: [], searchText: debounceQuery })
+        if (!signal.aborted && files) {
+          setResults(files.documents)
+          setOpen(true)
+        }
+      } catch (err) {
+        handleError(err, 'Error getting files')
       }
     }
-
     fetchFiles()
-  }, [query])
+    return () => {
+      setResults([])
+      controller.abort()
+    }
+  }, [debounceQuery])
 
   useEffect(() => {
-    if (!searchText) {
+    if (!searchQuery) {
       setQuery('')
     }
-  }, [searchText])
+  }, [searchQuery])
 
   const handleClickItem = (file: Models.Document) => {
     setOpen(false)
     setResults([])
     router.push(
-      `${file.type === 'video' ? 'media' : file.type + 's'}?query=${query}`
+      `${file.type === 'video' || file.type === 'audio' ? 'media' : file.type + 's'}?query=${query}`
     )
   }
 

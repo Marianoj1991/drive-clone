@@ -44,7 +44,7 @@ export default function ActionDropDown({ file }: { file: Models.Document }) {
     setIsDropDownOpen(false)
     setAction(null)
     setFileName(file.name)
-    // setEMails([])
+    setEmails([])
   }
 
   const handleAction = async () => {

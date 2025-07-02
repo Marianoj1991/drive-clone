@@ -30,7 +30,7 @@ export default async function page({ searchParams, params }: PageProps) {
         </div>
       </section>
 
-      {/* RENDER FILES */}
+      {/* HERE I RENDER FILES */}
 
       {files.total > 0 ? (
         <section className='file-list'>

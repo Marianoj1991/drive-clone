@@ -9,15 +9,20 @@ import { avatarPlaceholderUrl } from '@/constants'
 import { redirect } from 'next/navigation'
 
 const getUserByEmail = async (email: string) => {
-  const { databases } = await createAdminClient()
+  try {
+    const { databases } = await createAdminClient()
 
-  const result = await databases.listDocuments(
-    APPWRITECONFIG.databaseId,
-    APPWRITECONFIG.userCollectionId,
-    [Query.equal('email', [email])]
-  )
+    const result = await databases.listDocuments(
+      APPWRITECONFIG.databaseId,
+      APPWRITECONFIG.userCollectionId,
+      [Query.equal('email', [email])]
+    )
 
-  return result.total > 0 ? result.documents[0] : null
+    return result.total > 0 ? result.documents[0] : null
+  } catch (error) {
+    handleError(error, 'Failed to get user by email')
+    return null
+  }
 }
 
 const handleError = (error: unknown, message: string) => {

@@ -9,8 +9,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'StoreIt',
-  description: 'StoreIt - The only store solution you need.'
+  title: 'DocuStore',
+  description: 'DocuStore - Where your documents feel at home.'
 }
 
 export default function RootLayout({

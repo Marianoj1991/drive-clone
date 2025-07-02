@@ -18,7 +18,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <MobileNavigation {...currentUser} /> <Header {...currentUser} />
         <div className='main-content'>{children}</div>
       </section>
-
       <Toaster />
     </main>
   )

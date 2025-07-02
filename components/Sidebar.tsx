@@ -19,19 +19,20 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
     <aside className='sidebar'>
       <Link href='/'>
         <Image
-          src='/assets/icons/logo-full-brand.svg'
+          src='/assets/icons/logo-full-brand.png'
           alt='logo'
-          width={160}
-          height={50}
-          className='hidden h-auto lg:block'
+          width={300}
+          height={60}
+          className='hidden lg:block'
         />
-        <Image
-          src='/assets/icons/logo-brand.svg'
-          alt='logo'
-          width={52}
-          height={52}
-          className='lg:hidden'
-        />
+        <div className='lg:hidden relative w-[60px] h-[45px] '>
+          <Image
+            src='/assets/icons/logo-full.png'
+            alt='logo'
+            fill
+            className='w-[100px]'
+          />
+        </div>
       </Link>
 
       <nav className='sidebar-nav'>
@@ -66,13 +67,15 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
         </ul>
       </nav>
 
-      <Image
-        src='/assets/images/files-2.png'
-        alt='logo'
-        width={506}
-        height={418}
-        className='w-full'
-      />
+      <div className='w-[200px] d-flex items-center justify-center'>
+        <Image
+          src='/assets/images/files-2.png'
+          alt='logo'
+          width={506}
+          height={418}
+          className='hidden lg:block w-full'
+        />
+      </div>
 
       <div className='sidebar-user-info'>
         <Image
