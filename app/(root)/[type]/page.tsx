@@ -2,7 +2,7 @@ import { PageProps } from '@/.next/types/app/layout'
 import Card from '@/components/Card'
 import Sort from '@/components/Sort'
 import { getFiles } from '@/lib/actions/file.actions'
-import { getFileTypesParams } from '@/lib/utils'
+import { getFileTypesParams, getTotalSizeFiles } from '@/lib/utils'
 import { Models } from 'node-appwrite'
 
 export default async function page({ searchParams, params }: PageProps) {
@@ -12,6 +12,7 @@ export default async function page({ searchParams, params }: PageProps) {
 
   const types = getFileTypesParams(type) as FileType[]
   const files = await getFiles({ types, searchText, sort })
+  const totalSizePerType = getTotalSizeFiles(files.documents)
 
   return (
     <div className='page-container'>
@@ -20,7 +21,7 @@ export default async function page({ searchParams, params }: PageProps) {
 
         <div className='total-size-section'>
           <p className='body-1'>
-            Total: <span className='h5'>0 MB</span>
+            Total: <span className='h5'>{totalSizePerType}</span>
           </p>
 
           <div className='sort-container'>

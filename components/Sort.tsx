@@ -14,6 +14,8 @@ export default function Sort() {
   const path = usePathname()
   const router = useRouter()
 
+  console.log(path)
+
   const handleSort = (value: string) => {
     router.push(`${path}?sort=${value}`)
   }

@@ -45,6 +45,7 @@ export default function MobileNavigation({
           src='/assets/icons/logo-full-brand.png'
           alt='logo'
           fill
+          sizes='170px'
           className='object-contain'
         />
       </Link>
@@ -126,7 +127,7 @@ export default function MobileNavigation({
               onClick={async () => await signOutUser()}
             >
               <Image
-                src='assets/icons/logout.svg'
+                src='/assets/icons/logout.png'
                 alt='logout logo'
                 width={25}
                 height={25}

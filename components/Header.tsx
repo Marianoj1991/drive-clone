@@ -29,10 +29,10 @@ export default function Header({ $id: ownerId, accountId }: Props) {
             className='sign-out-button'
           >
             <Image
-              src='/assets/icons/logout.svg'
+              src='/assets/icons/logout.png'
               alt='logo'
-              width={24}
-              height={24}
+              width={36}
+              height={36}
               className='w-6'
             />
           </Button>

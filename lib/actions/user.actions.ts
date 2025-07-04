@@ -3,7 +3,7 @@
 import { Account, ID, Query } from 'node-appwrite'
 import { createAdminClient, createSessionClient } from '../appwrite'
 import { APPWRITECONFIG } from '../appwrite/config'
-import { parseStringify } from '../utils'
+import { convertFileSize, parseStringify } from '../utils'
 import { cookies } from 'next/headers'
 import { avatarPlaceholderUrl } from '@/constants'
 import { redirect } from 'next/navigation'
@@ -26,8 +26,14 @@ const getUserByEmail = async (email: string) => {
 }
 
 const handleError = (error: unknown, message: string) => {
-  console.log(error, message)
-  throw error
+  console.error('Appwrite Error', error)
+  if (error instanceof Error) {
+    throw new Error(`${message}: ${error.message}`)
+  } else if (typeof error === 'string') {
+    throw new Error(`${message}: ${error}`)
+  } else {
+    throw new Error(`${message}: Unexpected error`)
+  }
 }
 
 export const sendEmailOTP = async ({ email }: { email: string }) => {
@@ -91,7 +97,7 @@ export const verifySecret = async ({
     })
 
     return parseStringify({ sessionId: session.$id })
-  } catch (err) {
+  } catch (err: unknown) {
     handleError(err, 'Failed to verify OTP')
   }
 }
@@ -142,4 +148,25 @@ export const signInUser = async ({ email }: { email: string }) => {
   } catch (err) {
     handleError(err, 'Failed to sign in user')
   }
+}
+
+export const getTotalSpaceUsed = async (): Promise<number> => {
+  let totalSize = 0
+
+  try {
+    const { storage } = await createAdminClient()
+
+    const { buckets } = await storage.listBuckets()
+
+    for (const bucket of buckets) {
+      const { files } = await storage.listFiles(bucket.$id)
+      for (const file of files) {
+        totalSize += file.sizeOriginal
+      }
+    }
+  } catch (err) {
+    handleError(err, 'Error counting files size')
+  }
+
+  return parseStringify(convertFileSize(totalSize))
 }

@@ -29,7 +29,7 @@ export const navItems = [
 export const avatarPlaceholderUrl =
   'https://img.freepik.com/psd-gratis/3d-ilustracion-persona-gafas-sol_23-2149436188.jpg'
 
-export const MAX_FILE_SIZE = 20 * 1024 * 1024 // 50MB
+export const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB
 
 export const actionsDropDownItems = [
   {

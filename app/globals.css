@@ -183,7 +183,7 @@
     @apply bg-brand button hover:bg-brand-100 transition-all rounded-full !important;
   }
   .shad-otp {
-    @apply w-full flex gap-1 sm:gap-2 jFustify-between !important;
+    @apply w-full flex gap-1 sm:gap-2 justify-between !important;
   }
   .shad-otp-slot {
     @apply text-[40px] font-medium rounded-xl ring-brand shadow-drop-1 text-brand-100 justify-center flex border-2 border-light-300 size-12 md:size-16 gap-5 !important;
@@ -330,7 +330,7 @@
 
   /* Card */
   .file-card {
-    @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-3 !important;
+    @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-2 !important;
   }
   .file-card-details {
     @apply flex flex-col gap-2 text-light-100 !important;

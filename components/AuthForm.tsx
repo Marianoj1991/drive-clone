@@ -152,7 +152,7 @@ export default function AuthForm({ type }: { type: FormType }) {
         </form>
       </Form>
 
-      {/* OTP Verification */}
+      {/* Here we have OTP Verification */}
 
       {accountId && (
         <OTPModal

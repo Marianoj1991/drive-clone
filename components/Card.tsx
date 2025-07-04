@@ -38,7 +38,7 @@ export default function Card({ file }: { file: Models.Document }) {
         </p>
       </div>
 
-      {file.name}
+      <p className='break-words'>{file.name}</p>
     </Link>
   )
 }

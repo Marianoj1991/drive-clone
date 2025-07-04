@@ -54,16 +54,16 @@ export default function FileUploader({
   const handleUpdateFiles = async () => {
     try {
       setIsLoading(true)
-      const uploadPromises = files.map((file) => {
-        return uploadFile({ file, ownerId, accountId, path }).then(
-          (uploadedFile) => {
-            if (uploadedFile) {
-              setFiles((prevFiles) =>
-                prevFiles.filter((f) => f.name !== file.name)
-              )
-            }
-          }
-        )
+      const uploadPromises = files.map(async (file) => {
+        const uploadedFile = await uploadFile({
+          file,
+          ownerId,
+          accountId,
+          path
+        })
+        if (uploadedFile) {
+          setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name))
+        }
       })
       await Promise.all(uploadPromises)
     } catch (err) {
@@ -106,13 +106,21 @@ export default function FileUploader({
 
       {files.length > 0 && (
         <ul className='uploader-preview-list'>
-          {/* <h4 className='h4 text-light-100'>Uploading</h4> */}
           <button
-            className='h4 bg-rose-400 px-5 py-3 rounded-xl w-fit text-white font-bold'
+            className='h4 bg-rose-400 px-5 py-3 rounded-xl w-fit text-white font-bold flex gap-2 items-center'
             disabled={isLoading}
             onClick={handleUpdateFiles}
           >
             {!isLoading ? 'Confirm uploading?' : 'Uploading'}
+            {isLoading && (
+              <Image
+                src='/assets/icons/loader.svg'
+                alt='loader'
+                width={24}
+                height={24}
+                className='ml-2 animate-spin'
+              />
+            )}
           </button>
           {files.map((file, index) => {
             const { type, extension } = getFileType(file.name)
