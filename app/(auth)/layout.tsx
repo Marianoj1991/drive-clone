@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className='flex min-h-screen'>
       <section className='bg-brand p-10 hidden w-1/2 items-center justify-center lg:flex xl:w-2/5 '>
         <div className='flex max-h-[800px] max-w-[430px] flex-col items-center justify-center space-y-12'>
-          <div className='bg-white w-[200px] h-[200px] rounded-full flex items-center justify-center overflow-hidden'>
+          <div className='bg-white w-[150px] h-[150px] rounded-full flex items-center justify-center overflow-hidden'>
             <Image
               src='/assets/icons/logo-full.png'
               alt='logo'
@@ -22,14 +22,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               Centralize all your important files with confidence.
             </p>
           </div>
-          <Image
-            src='/assets/images/files.png'
-            alt='Files'
-            width={342}
-            height={342}
-            className='transition-all hover:rotate-6 hover:scale-105'
-            priority={true}
-          />
+          <div className='w-44 h-44 relative'>
+            <Image
+              src='/assets/images/files.png'
+              alt='Files'
+              fill
+              className='transition-all hover:rotate-6 hover:scale-105'
+              priority={true}
+            />
+          </div>
         </div>
       </section>
 
