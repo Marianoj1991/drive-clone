@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import Search from './Search'
 import FileUploader from './FileUploader'
 import { signOutUser } from '@/lib/actions/user.actions'
+import DarkModeToggle from './DarkModeToggle'
 
 interface Props {
   accountId: string
@@ -18,6 +19,7 @@ export default function Header({ $id: ownerId, accountId }: Props) {
           ownerId={ownerId}
           accountId={accountId}
         />
+        <DarkModeToggle />
         <form
           action={async () => {
             'use server'

@@ -71,7 +71,7 @@ export default function MobileNavigation({
                 height={44}
                 className='header-user-avatar'
               />
-              <div className='sm:hidden lg:block'>
+              <div className='sm:hidden lg:block dark:text-white'>
                 <p className='subtitle-2 capitalize'>{fullName}</p>
                 <p className='caption'>{email}</p>
               </div>
@@ -106,7 +106,7 @@ export default function MobileNavigation({
                           pathname === item.url && 'nav-icon-active'
                         )}
                       />
-                      <p>{item.name}</p>
+                      <p className='dark:text-white'>{item.name}</p>
                     </li>
                   </Link>
                 )

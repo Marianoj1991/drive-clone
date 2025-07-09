@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-white text-dark-200 min-h-screen;
+    @apply dark:bg-slate-800 bg-white text-dark-200 min-h-screen;
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -211,7 +211,7 @@
 
   /* Sidebar & MobileNavigation */
   .nav-icon {
-    @apply w-6 filter invert opacity-25 !important;
+    @apply w-6 filter invert opacity-25 dark:invert-0 dark:opacity-100 !important;
   }
   .nav-icon-active {
     @apply invert-0 opacity-100 !important;
@@ -221,7 +221,7 @@
 
   /* Root Layout */
   .main-content {
-    @apply remove-scrollbar h-full flex-1 overflow-auto bg-light-400 px-5 py-7 sm:mr-7 sm:rounded-[30px] md:mb-7 md:px-9 md:py-10 !important;
+    @apply remove-scrollbar h-full flex-1 overflow-auto bg-light-400 px-5 py-7 sm:mr-7 sm:rounded-[30px] md:mb-7 md:px-9 md:py-10 dark:bg-slate-600 !important;
   }
 
   /* Dashboard */
@@ -330,10 +330,10 @@
 
   /* Card */
   .file-card {
-    @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-2 !important;
+    @apply flex cursor-pointer flex-col gap-6 rounded-[18px] bg-white p-5 shadow-sm transition-all hover:shadow-drop-2 dark:bg-slate-700 !important;
   }
   .file-card-details {
-    @apply flex flex-col gap-2 text-light-100 !important;
+    @apply flex flex-col gap-2 text-light-100 dark:text-white !important;
   }
 
   /* Chart */
@@ -385,7 +385,7 @@
     @apply flex-center min-w-fit gap-4 !important;
   }
   .sign-out-button {
-    @apply flex-center h-[52px] min-w-[54px] items-center rounded-full bg-brand/10 p-0 text-brand shadow-none transition-all hover:bg-brand/20 !important;
+    @apply flex-center h-[52px] min-w-[54px] items-center rounded-full bg-brand/10 p-0 text-brand shadow-none transition-all hover:bg-brand/20 dark:bg-brand !important;
   }
 
   /* Mobile Navigation */
@@ -441,7 +441,7 @@
     @apply h5 mt-9 flex-1 gap-1 text-brand !important;
   }
   .sidebar-nav-item {
-    @apply flex text-light-100 gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center h5 lg:px-[30px] h-[52px] lg:rounded-full !important;
+    @apply flex text-light-100 gap-4 rounded-xl lg:w-full justify-center lg:justify-start items-center h5 lg:px-[30px] h-[52px] lg:rounded-full hover:text-white hover:bg-[#51AEF5] !important;
   }
   .sidebar-user-info {
     @apply mt-4 flex items-center justify-center gap-2 rounded-full bg-brand/10 p-1 text-light-100 lg:justify-start lg:p-3 !important;
@@ -456,7 +456,7 @@
 
   /* Sort */
   .sort-select {
-    @apply shad-no-focus h-11 w-full rounded-[8px] border-transparent bg-white !shadow-sm sm:w-[210px] !important;
+    @apply shad-no-focus h-11 w-full rounded-[8px] border-transparent bg-white !shadow-sm sm:w-[210px] dark:bg-slate-700 !important;
   }
   .sort-select-content {
     @apply !shadow-drop-3 !important;

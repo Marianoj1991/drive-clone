@@ -44,7 +44,7 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
               <Link
                 href={item.url}
                 key={item.name}
-                className='lg:w-full'
+                className='lg:w-full '
               >
                 <li
                   className={cn(
@@ -59,7 +59,7 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
                     height={24}
                     className={cn('nav-icon', isActive && 'nav-icon-active')}
                   />
-                  <p className='hidden lg:block'>{item.name}</p>
+                  <p className='dark:text-white hidden lg:block'>{item.name}</p>
                 </li>
               </Link>
             )
@@ -77,7 +77,7 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
         />
       </div>
 
-      <div className='sidebar-user-info'>
+      <div className='sidebar-user-info '>
         <Image
           src={avatarPlaceholderUrl}
           alt='Avatar'
@@ -86,7 +86,7 @@ export default function Sidebar({ fullName, email, avatar }: currentUser) {
           className='sidebar-user-avatar'
         />
 
-        <div className='hidden lg:block'>
+        <div className='hidden lg:block dark:text-white'>
           <p className='subtitle-2 capitalize'>{fullName}</p>
           <p className='caption'>{email}</p>
         </div>

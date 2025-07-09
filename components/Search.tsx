@@ -62,7 +62,7 @@ export default function Search() {
 
   return (
     <div className='search'>
-      <div className='search-input-wrapper'>
+      <div className='search-input-wrapper dark:bg-slate-600'>
         <Image
           src='/assets/icons/search.svg'
           alt='Search'

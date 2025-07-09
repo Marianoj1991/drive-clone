@@ -1,3 +1,5 @@
+export const totalSpaceInAppwrite = 2 * 1024
+
 export const navItems = [
   {
     name: 'Dashboard',
@@ -7,22 +9,30 @@ export const navItems = [
   {
     name: 'Documents',
     icon: '/assets/icons/documents.svg',
-    url: '/documents'
+    url: '/documents',
+    type: 'documents',
+    bgColor: '#ff7474'
   },
   {
     name: 'Images',
     icon: '/assets/icons/images.svg',
-    url: '/images'
+    url: '/images',
+    type: 'images',
+    bgColor: '#5688ff'
   },
   {
     name: 'Media',
     icon: '/assets/icons/video.svg',
-    url: '/media'
+    url: '/media',
+    type: 'media',
+    bgColor: '#3dd9b3'
   },
   {
     name: 'Others',
     icon: '/assets/icons/others.svg',
-    url: '/others'
+    url: '/others',
+    type: 'others',
+    bgColor: '#eea8fd'
   }
 ]
 

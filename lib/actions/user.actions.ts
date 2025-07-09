@@ -3,7 +3,7 @@
 import { Account, ID, Query } from 'node-appwrite'
 import { createAdminClient, createSessionClient } from '../appwrite'
 import { APPWRITECONFIG } from '../appwrite/config'
-import { convertFileSize, parseStringify } from '../utils'
+import { convertFileSize, convertSpaceUsedToMB, parseStringify } from '../utils'
 import { cookies } from 'next/headers'
 import { avatarPlaceholderUrl } from '@/constants'
 import { redirect } from 'next/navigation'
@@ -154,19 +154,34 @@ export const getTotalSpaceUsed = async (): Promise<number> => {
   let totalSize = 0
 
   try {
-    const { storage } = await createAdminClient()
-
+    const { storage, account } = await createAdminClient()
     const { buckets } = await storage.listBuckets()
 
     for (const bucket of buckets) {
-      const { files } = await storage.listFiles(bucket.$id)
-      for (const file of files) {
-        totalSize += file.sizeOriginal
+      let limit = 100
+      let offset = 0
+      let hasMore = true
+
+      while (hasMore) {
+        const { files, total } = await storage.listFiles(bucket.$id, [
+          Query.limit(limit),
+          Query.offset(offset)
+        ])
+        for (const file of files) {
+          totalSize += file.sizeOriginal
+        }
+
+        offset += limit
+        hasMore = offset < total
       }
     }
   } catch (err) {
     handleError(err, 'Error counting files size')
   }
 
-  return parseStringify(convertFileSize(totalSize))
+  const totalSizeConverted = convertFileSize(totalSize)
+
+  const usedSpaceinMB = convertSpaceUsedToMB(totalSizeConverted)
+
+  return parseStringify(usedSpaceinMB)
 }

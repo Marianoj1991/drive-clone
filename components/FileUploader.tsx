@@ -107,7 +107,7 @@ export default function FileUploader({
       {files.length > 0 && (
         <ul className='uploader-preview-list'>
           <button
-            className='h4 bg-rose-400 px-5 py-3 rounded-xl w-fit text-white font-bold flex gap-2 items-center'
+            className='h4 px-5 py-3 rounded-xl w-fit text-white font-bold flex gap-2 items-center bg-brand'
             disabled={isLoading}
             onClick={handleUpdateFiles}
           >
@@ -155,6 +155,7 @@ export default function FileUploader({
                   width={24}
                   height={24}
                   alt='Remove'
+                  className='cursor-pointer'
                   onClick={(e) => handleRemoveFile(e, file.name)}
                 />
               </li>
