@@ -1,7 +1,13 @@
 'use client'
 
 import { Doughnut } from 'react-chartjs-2'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  ChartOptions
+} from 'chart.js'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -24,12 +30,12 @@ export default function StorageChart({
     ]
   }
 
-  const options = {
+  const options: ChartOptions<'doughnut'> = {
     cutout: '60%',
     plugins: {
       legend: {
         display: true,
-        position: 'bottom',
+        position: 'bottom' as const,
         labels: {
           boxWidth: 16,
           padding: 14,
