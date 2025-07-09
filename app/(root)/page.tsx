@@ -1,7 +1,9 @@
 import DashboardCard from '@/components/DashboardCard'
 import StorageChart from '@/components/StorageChart'
-import { navItems } from '@/constants'
 import getDashboardMetrics from '@/hooks/useDashboardMetrics'
+
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const {
     freeSpaceInMB,
