@@ -4,14 +4,14 @@ import React from 'react'
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className='flex min-h-screen'>
-      <section className='bg-brand p-10 hidden w-1/2 items-center justify-center lg:flex xl:w-2/5'>
+      <section className='bg-brand p-10 hidden w-1/2 items-center justify-center lg:flex xl:w-2/5 '>
         <div className='flex max-h-[800px] max-w-[430px] flex-col items-center justify-center space-y-12'>
-          <div className='bg-white w-[300px] h-[300px] rounded-full px-8 py-16 flex items-center justify-center'>
+          <div className='bg-white w-[200px] h-[200px] rounded-full flex items-center justify-center overflow-hidden'>
             <Image
               src='/assets/icons/logo-full.png'
               alt='logo'
-              width={300}
-              height={82}
+              width={120}
+              height={120}
             />
           </div>
           <div className='space-y-5 text-white'>
@@ -38,9 +38,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Image
             src='/assets/icons/logo-full-brand.png'
             alt='logo'
-            width={224}
+            width={200}
             height={82}
-            className='h-auto w-[200px] lg:w-[250px]'
+            className='w-full'
           />
         </div>
         {children}
