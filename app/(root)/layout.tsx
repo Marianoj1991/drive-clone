@@ -7,9 +7,15 @@ import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 
 export default async function Layout({ children }: { children: ReactNode }) {
-  const currentUser = await getCurrentUser()
+  let currentUser
+  try {
+    currentUser = await getCurrentUser()
+  } catch (err) {
+    return redirect('/sign-in')
+  }
 
   if (!currentUser) return redirect('/sign-in')
+
   return (
     <main className='flex min-h-screen'>
       <Sidebar {...currentUser} />

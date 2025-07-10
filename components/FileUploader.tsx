@@ -128,7 +128,7 @@ export default function FileUploader({
             return (
               <li
                 key={`${file.name}-${index}`}
-                className='uploader-preview-item'
+                className='uploader-preview-item dark:text-white dark:bg-slate-600'
               >
                 <div className='flex items-center gap-3'>
                   <Thumbnail
@@ -155,7 +155,7 @@ export default function FileUploader({
                   width={24}
                   height={24}
                   alt='Remove'
-                  className='cursor-pointer'
+                  className='cursor-pointer dark:bg-slate-300 rounded-full'
                   onClick={(e) => handleRemoveFile(e, file.name)}
                 />
               </li>

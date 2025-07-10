@@ -26,7 +26,6 @@ const getUserByEmail = async (email: string) => {
 }
 
 const handleError = (error: unknown, message: string) => {
-  console.error('Appwrite Error', error)
   if (error instanceof Error) {
     throw new Error(`${message}: ${error.message}`)
   } else if (typeof error === 'string') {
@@ -117,9 +116,11 @@ export const getCurrentUser = async () => {
     if (user.total <= 0) return null
 
     return parseStringify(user.documents[0])
-  } catch (err) {
-    console.log('Error al obtener usuario')
-    console.log(err)
+  } catch (err: unknown) {
+    if ((err as any).source === 'redirect') {
+      return null
+    }
+    handleError(err, 'Error al obtener usuario')
   }
 }
 

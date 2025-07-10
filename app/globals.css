@@ -364,10 +364,10 @@
     @apply primary-btn h-[52px] gap-2 px-10 shadow-drop-1 !important;
   }
   .uploader-preview-list {
-    @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-drop-3 !important;
+    @apply fixed bottom-10 right-10 z-50 flex size-full h-fit max-w-[480px] flex-col gap-3 rounded-[20px] bg-white p-7 shadow-drop-3 dark:bg-slate-800 !important;
   }
   .uploader-preview-item {
-    @apply flex items-center justify-between gap-3 rounded-xl p-3 shadow-drop-3 !important;
+    @apply flex items-center justify-between gap-3 rounded-xl p-3 shadow-drop-2 !important;
   }
   .preview-item-name {
     @apply subtitle-2 mb-2 truncate max-w-[300px] !important;
