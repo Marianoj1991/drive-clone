@@ -16,13 +16,27 @@ interface IdashboardCardData {
   icon: string
 }
 
-export default async function getDashboardMetrics() {
+interface IReturnMetrics {
+  usedSpaceinMB: number
+  totalSpaceInAppwrite: number
+  freeSpaceInMB: number
+  dashboardCardData: IdashboardCardData[]
+}
+
+const EMPTY_METRICS: IReturnMetrics = {
+  usedSpaceinMB: 0,
+  totalSpaceInAppwrite: totalSpaceInAppwrite,
+  freeSpaceInMB: totalSpaceInAppwrite,
+  dashboardCardData: []
+}
+
+export default async function getDashboardMetrics(): Promise<IReturnMetrics> {
   // ACA OBTENGO TODOS LOS FILES
   const types: FileType[] = []
 
   const files: Models.Document = await getFiles({ types })
 
-  if (!files) return null
+  if (!files) return EMPTY_METRICS
 
   const dashboardCardData: IdashboardCardData[] = navItems
     .filter((item) => item.type)
