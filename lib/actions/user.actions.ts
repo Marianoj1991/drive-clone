@@ -27,7 +27,8 @@ const getUserByEmail = async (email: string) => {
 
 const handleError = (error: unknown, message: string) => {
   if (error instanceof Error) {
-    throw new Error(`${message}: ${error.message}`)
+    console.log(`${message}: ${error.message}`)
+    return null
   } else if (typeof error === 'string') {
     throw new Error(`${message}: ${error}`)
   } else {
@@ -120,7 +121,7 @@ export const getCurrentUser = async () => {
     if ((err as any).source === 'redirect') {
       return null
     }
-    handleError(err, 'Error al obtener usuario')
+    return handleError(err, 'Error al obtener usuario')
   }
 }
 

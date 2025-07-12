@@ -19,7 +19,10 @@ interface IdashboardCardData {
 export default async function getDashboardMetrics() {
   // ACA OBTENGO TODOS LOS FILES
   const types: FileType[] = []
+
   const files: Models.Document = await getFiles({ types })
+
+  if (!files) return null
 
   const dashboardCardData: IdashboardCardData[] = navItems
     .filter((item) => item.type)

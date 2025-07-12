@@ -58,7 +58,7 @@ export const uploadFile = async ({
 
 export const handleError = async (error: unknown, message: string) => {
   console.log(error, message)
-  throw error
+  return null
 }
 
 const createQueries = (
@@ -111,7 +111,7 @@ export const getFiles = async ({
 
     return parseStringify(files)
   } catch (error) {
-    handleError(error, 'Failed to get files')
+    return handleError(error, 'Failed to get files')
   }
 }
 

@@ -1,10 +1,4 @@
-import { getFiles } from '@/lib/actions/file.actions'
-import {
-  convertFileSize,
-  convertSpaceUsedToMB,
-  getFileTypesParams,
-  getTotalSizeFiles
-} from '@/lib/utils'
+import { convertFileSize, convertSpaceUsedToMB } from '@/lib/utils'
 import Image from 'next/image'
 
 interface Props {
@@ -23,7 +17,7 @@ export default async function DashboardCard({
   total,
   lastUpdate
 }: Props) {
-  const spaceInMB = convertSpaceUsedToMB(convertFileSize(total))
+  let spaceInMB = convertSpaceUsedToMB(convertFileSize(total)).toFixed(2)
   let date: Date | null = null
   if (lastUpdate) {
     date = new Date(lastUpdate)

@@ -242,7 +242,7 @@ export const getTotalSizeFiles = (files: Models.Document[]) => {
   return parseStringify(convertFileSize(totalSize))
 }
 
-export const convertSpaceUsedToMB = (size: string) => {
+export const convertSpaceUsedToMB = (size: string): number => {
   const [sizeString, unit] = size.split(' ')
 
   const value = Number(sizeString)
