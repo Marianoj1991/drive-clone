@@ -1,6 +1,6 @@
 'use server'
 
-import { Account, ID, Query } from 'node-appwrite'
+import { Account, ID, Models, Query } from 'node-appwrite'
 import { createAdminClient, createSessionClient } from '../appwrite'
 import { APPWRITECONFIG } from '../appwrite/config'
 import { convertFileSize, convertSpaceUsedToMB, parseStringify } from '../utils'
@@ -25,15 +25,16 @@ const getUserByEmail = async (email: string) => {
   }
 }
 
-const handleError = (error: unknown, message: string) => {
-  if (error instanceof Error) {
-    console.log(`${message}: ${error.message}`)
-    return null
-  } else if (typeof error === 'string') {
-    throw new Error(`${message}: ${error}`)
-  } else {
-    throw new Error(`${message}: Unexpected error`)
-  }
+const handleError = (error: unknown, message: string): null => {
+  const text =
+    error instanceof Error
+      ? error.message
+      : typeof error === 'string'
+        ? error
+        : 'Unexpected error'
+
+  console.error(`${message}: ${error}`)
+  return null
 }
 
 export const sendEmailOTP = async ({ email }: { email: string }) => {
@@ -102,10 +103,9 @@ export const verifySecret = async ({
   }
 }
 
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (): Promise<Models.Document | null> => {
+  const { databases, account } = await createSessionClient()
   try {
-    const { databases, account } = await createSessionClient()
-
     const result = await account.get()
 
     const user = await databases.listDocuments(
