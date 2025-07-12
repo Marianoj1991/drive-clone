@@ -33,7 +33,7 @@ const handleError = (error: unknown, message: string): null => {
         ? error
         : 'Unexpected error'
 
-  console.error(`${message}: ${error}`)
+  console.error(`${message}: ${text}`)
   return null
 }
 
