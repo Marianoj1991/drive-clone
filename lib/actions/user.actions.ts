@@ -103,7 +103,7 @@ export const verifySecret = async ({
   }
 }
 
-export const getCurrentUser = async (): Promise<Models.Document | null> => {
+export const getCurrentUser = async () => {
   const { databases, account } = await createSessionClient()
   try {
     const result = await account.get()
