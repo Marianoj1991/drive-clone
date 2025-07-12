@@ -26,13 +26,14 @@ interface IReturnMetrics {
 const EMPTY_METRICS: IReturnMetrics = {
   usedSpaceinMB: 0,
   totalSpaceInAppwrite: totalSpaceInAppwrite,
-  freeSpaceInMB: totalSpaceInAppwrite,
+  freeSpaceInMB: 0,
   dashboardCardData: []
 }
 
 export default async function getDashboardMetrics(): Promise<IReturnMetrics> {
   // ACA OBTENGO TODOS LOS FILES
   const types: FileType[] = []
+  let totalSpaceUsed: number = 0
 
   const files: Models.Document = await getFiles({ types })
 
@@ -61,16 +62,11 @@ export default async function getDashboardMetrics(): Promise<IReturnMetrics> {
         card.lastUpdate = file.$createdAt
       }
     }
+
+    totalSpaceUsed += file.size
   })
 
-  const totalSpacedUsed = files.documents.reduce(
-    (acc: number, doc: Models.Document) => {
-      return (acc += doc.size)
-    },
-    0
-  )
-
-  const usedSpaceinMB = convertSpaceUsedToMB(convertFileSize(totalSpacedUsed))
+  const usedSpaceinMB = convertSpaceUsedToMB(convertFileSize(totalSpaceUsed))
 
   // TOMAMOS EL ESPACIO EN MB
   const freeSpaceInMB = totalSpaceInAppwrite - usedSpaceinMB
