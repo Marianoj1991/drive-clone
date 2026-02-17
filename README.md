@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📂 Drive Clone App
 
-## Getting Started
+Aplicación web tipo clon de Google Drive desarrollada con **Next.js 15**, utilizando **Appwrite** como servicio de autenticación y base de datos.
 
-First, run the development server:
+## 🚀 Tecnologías utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Next.js 15](https://nextjs.org/)
+- [Appwrite](https://appwrite.io/) para autenticación y almacenamiento de datos
+- [TypeScript](https://www.typescriptlang.org/) para tipado estático
+- [Tailwind CSS](https://tailwindcss.com/) para estilos (si corresponde)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📱 Funcionalidades principales
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Autenticación segura** con Appwrite (sign in / sign out).
+- **Subida de archivos** al sistema.
+- **Filtrado por tipo de archivo** (documentos, imágenes, etc.).
+- **Vista detallada** de cada archivo con metadatos.
+- **Eliminación de archivos** desde la interfaz.
+- **Dashboard informativo** con métricas de espacio ocupado y estadísticas de uso.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Deploy
 
-## Learn More
+La aplicación está desplegada en Vercel:  
+👉 [Drive Clone App](https://drive-clone-xi.vercel.app/sign-in)
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ Instalación y ejecución
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/tuusuario/drive-clone-app.git
+   cd drive-clone-app
+   ```
+2. Instalar dependencias:
+   ```bash
+   pnpm install
+   ```
+3. Configurar variables de entorno en .env.local:
+   ```bash
+   NEXT_PUBLIC_APPWRITE_ENDPOINT
+   NEXT_PUBLIC_APPWRITE_PROJECT
+   NEXT_PUBLIC_APPWRITE_DATABASE
+   NEXT_PUBLIC_APPWRITE_USERS_COLLECTION
+   NEXT_PUBLIC_APPWRITE_BUCKET
+   NEXT_PUBLIC_APPWRITE_FILES_COLLECTION
+   NEXT_APPWRITE_KEY
+   ```
+4. Ejecutar en desarrollo:
+   ```bash
+   pnpm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Estructura de carpetas
 
-## Deploy on Vercel
+![Estructura de carpetas](./screenshots/file-structure.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 Capturas de pantalla
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Dashboard
+
+![Dashboard](./screenshots/homepage.png)
+
+### Documents
+
+![Documents Selected](./screenshots/homepage-docs.png)
+
+### Uploading
+
+![Uploading](./screenshots/uploading.png)
+
+### Uploaded
+
+![Uploaded Document](./screenshots/uploaded.png)
+
+### Document Options
+
+![Uploaded Document](./screenshots/document-info.png)
+
+### Document Option Selected Example
+
+![Uploaded Document](./screenshots/document-option.png)
+![Uploaded Document](./screenshots/document-rename.png)
+
+### DarkMode
+
+![DarkMode](./screenshots/darkmode.png)
